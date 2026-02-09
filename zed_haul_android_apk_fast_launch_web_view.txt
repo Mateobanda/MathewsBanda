@@ -1,0 +1,69 @@
+// Highlink Zambia ANDROID APK – FAST LAUNCH
+// Simple WebView app wrapping the Highlink Zambia web app
+// This is the FASTEST way to get an APK this week
+
+// Tech: Flutter (Android)
+
+// pubspec.yaml (important parts)
+name: highlink_zambia
+version: 1.0.0+1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  webview_flutter: ^4.4.2
+
+// lib/main.dart
+import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
+void main() {
+  runApp(const Highlink ZambiaApp());
+}
+
+class Highlink ZambiaApp extends StatelessWidget {
+  const Highlink ZambiaApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Highlink Zambia',
+      home: const WebViewPage(),
+    );
+  }
+}
+
+class WebViewPage extends StatefulWidget {
+  const WebViewPage({super.key});
+
+  @override
+  State<WebViewPage> createState() => _WebViewPageState();
+}
+
+class _WebViewPageState extends State<WebViewPage> {
+  late final WebViewController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(Uri.parse('http://YOUR_PC_IP:3000'));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Highlink Zambia'),
+        backgroundColor: Colors.black,
+      ),
+      body: WebViewWidget(controller: _controller),
+    );
+  }
+}
+
+// NOTE:
+// Replace YOUR_PC_IP with your laptop IP address
+// Phone and laptop must be on same Wi-Fi
